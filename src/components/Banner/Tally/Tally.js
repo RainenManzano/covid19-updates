@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import AnimatedNumber from "animated-number-react";
+import AnimatedNumber from "react-animated-number";
 
 import "./Tally.css";
 import bg from "../../../assets/images/background.jpg";
@@ -68,13 +68,13 @@ const Tally = (props) => {
       }).then((ipInfo) => {
         // Getting the country
         if (isMounted) {
-          console.log(ipInfo);
+          // console.log(ipInfo);
           ipInfo = ipInfo.data.split("\n");
           ipInfo = ipInfo.filter((info) => {
             return info.indexOf("Country") !== -1 ? info : false;
           });
-          setCountry(ipInfo[0].split(":")[1].trim());
-          // setCountry("Philippines");
+          if (!ipInfo[0]) setCountry("Philippines");
+          else setCountry(ipInfo[0].split(":")[1].trim());
         }
       });
     }
@@ -117,6 +117,10 @@ const Tally = (props) => {
           setTotalDeaths(cases[0].TotalDeaths);
           setNewRecovered(cases[0].NewRecovered);
           setTotalRecovered(cases[0].TotalRecovered);
+          setActiveCases(
+            cases[0].TotalConfirmed -
+              (cases[0].TotalDeaths + cases[0].TotalRecovered)
+          );
         }
       }
     }
@@ -124,17 +128,6 @@ const Tally = (props) => {
       isMounted = false;
     };
   }, [ipAddress, country, casesContext.summary]);
-
-  // Setting Active Cases
-  useEffect(() => {
-    let isMounted = true;
-    if (isMounted) {
-      setActiveCases(totalConfirmed - (totalDeaths + totalRecovered));
-    }
-    return () => {
-      isMounted = false;
-    };
-  }, [totalConfirmed, totalDeaths, totalRecovered]);
 
   const formatValue = (value) =>
     value.toLocaleString(undefined, {
@@ -150,6 +143,10 @@ const Tally = (props) => {
         data: (
           <AnimatedNumber
             value={newConfirmed}
+            style={{
+              transition: "0.8s ease-out",
+              transitionProperty: "color, opacity",
+            }}
             duration={duration}
             formatValue={formatValue}
           />
@@ -160,6 +157,10 @@ const Tally = (props) => {
         data: (
           <AnimatedNumber
             value={totalConfirmed}
+            style={{
+              transition: "0.8s ease-out",
+              transitionProperty: "color, opacity",
+            }}
             duration={duration}
             formatValue={formatValue}
           />
@@ -173,6 +174,10 @@ const Tally = (props) => {
         data: (
           <AnimatedNumber
             value={newDeaths}
+            style={{
+              transition: "0.8s ease-out",
+              transitionProperty: "color, opacity",
+            }}
             duration={duration}
             formatValue={formatValue}
           />
@@ -183,6 +188,10 @@ const Tally = (props) => {
         data: (
           <AnimatedNumber
             value={totalDeaths}
+            style={{
+              transition: "0.8s ease-out",
+              transitionProperty: "color, opacity",
+            }}
             duration={duration}
             formatValue={formatValue}
           />
@@ -191,11 +200,15 @@ const Tally = (props) => {
       },
     ],
     [
-      { data: "RECOVERIES", tdClass: "cases" },
+      { data: "RECOVERED", tdClass: "cases" },
       {
         data: (
           <AnimatedNumber
             value={newRecovered}
+            style={{
+              transition: "0.8s ease-out",
+              transitionProperty: "color, opacity",
+            }}
             duration={duration}
             formatValue={formatValue}
           />
@@ -206,6 +219,10 @@ const Tally = (props) => {
         data: (
           <AnimatedNumber
             value={totalRecovered}
+            style={{
+              transition: "0.8s ease-out",
+              transitionProperty: "color, opacity",
+            }}
             duration={duration}
             formatValue={formatValue}
           />
@@ -237,8 +254,13 @@ const Tally = (props) => {
       <p id="active-cases">
         ACTIVE CASES &nbsp;&nbsp;
         <AnimatedNumber
-          className="active-number"
+          component="span"
           value={activeCases}
+          className="active-number"
+          style={{
+            transition: "0.8s ease-out",
+            transitionProperty: "color, opacity",
+          }}
           duration={duration}
           formatValue={formatValue}
         />

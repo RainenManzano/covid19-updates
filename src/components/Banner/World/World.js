@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import AnimatedNumber from "animated-number-react";
+import AnimatedNumber from "react-animated-number";
 // Components
 import Table from "../../../UI/Table";
 // Contexts
@@ -27,7 +27,7 @@ const World = (props) => {
       maximumFractionDigits: 0,
       minimumFractionDigits: 0,
     });
-  let headings = ["Country", "", "Cases", "Recoveries", "Deaths"];
+  let headings = ["Country", "", "Cases", "Recovered", "Deaths"];
 
   // Global Cases (Total, Deaths, Recoveries)
   useEffect(() => {
@@ -93,17 +93,25 @@ const World = (props) => {
         <h1 className="text-white weight-900 text-center bb br bl pb text-yellow number">
           <AnimatedNumber
             value={cases}
+            style={{
+              transition: "0.8s ease-out",
+              transitionProperty: "color, opacity",
+            }}
             duration={duration}
             formatValue={formatValue}
           />
         </h1>
         <div className="half-width">
           <h2 className="text-white lh-50 weight-500 br bl text-center">
-            Recoveries
+            Recovered
           </h2>
           <h2 className="text-white weight-900 br bl text-center pb bb text-green number">
             <AnimatedNumber
               value={recoveries}
+              style={{
+                transition: "0.8s ease-out",
+                transitionProperty: "color, opacity",
+              }}
               duration={duration}
               formatValue={formatValue}
             />
@@ -114,6 +122,10 @@ const World = (props) => {
           <h2 className="text-white weight-900 br text-center pb bb text-red number">
             <AnimatedNumber
               value={deaths}
+              style={{
+                transition: "0.8s ease-out",
+                transitionProperty: "color, opacity",
+              }}
               duration={duration}
               formatValue={formatValue}
             />
