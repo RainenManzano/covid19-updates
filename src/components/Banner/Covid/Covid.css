@@ -1,0 +1,25 @@
+#banner-2 {
+  min-height: 100vh;
+  background: #f5f3f3;
+  overflow: hidden;
+}
+
+.picture-container {
+  width: 30%;
+  height: auto;
+  float: left;
+}
+
+.picture-container > img {
+  max-width: 100%;
+  padding-top: 50px;
+}
+
+.info {
+  padding-left: 380px;
+  padding-top: 50px;
+}
+
+.info > h3 {
+  color: #ad2222ee;
+}

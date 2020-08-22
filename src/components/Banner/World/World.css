@@ -1,0 +1,47 @@
+#global-banner {
+  min-height: 100vh;
+  width: 100%;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.7);
+}
+
+#countriesTable {
+  color: white;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+table#countriesTable tbody {
+  display: block;
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+table#countriesTable thead,
+table#countriesTable tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-bottom: 1px solid gray;
+  padding: 10px 0px;
+  font-size: 20px;
+}
+
+.bg-yellow {
+  background: yellow;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.4);
+}
+
+.bg-red {
+  background: red;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.4);
+}
+
+.bg-green {
+  background: green;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.4);
+}
+
+.number {
+  font-size: 42px !important;
+}

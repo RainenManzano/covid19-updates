@@ -1,0 +1,71 @@
+.banner {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  text-align: center;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.85);
+}
+
+.banner > h2 {
+  position: relative;
+  color: white;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  padding-top: 25px;
+}
+
+.banner > #tallyTitle {
+  color: black;
+  font-size: 42px;
+  font-weight: 700;
+  padding: 10px;
+  background: yellow;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.2);
+}
+
+.banner > h6 {
+  color: white;
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+#tally {
+  width: 80%;
+  margin: auto;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#tally > thead > tr > th {
+  padding: 10px 80px;
+  font-size: 28px;
+  font-weight: 900;
+  border-bottom: 2px solid white;
+}
+
+#tally > tbody > tr > td {
+  padding: 15px 80px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.cases {
+  border-right: 2px solid white;
+}
+
+#active-cases {
+  color: white;
+  font-size: 36px;
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+  font-weight: 700;
+  color: yellow;
+  border: 3px solid white;
+}
+
+.active-number {
+  font-size: 54px !important;
+  font-weight: 900;
+}

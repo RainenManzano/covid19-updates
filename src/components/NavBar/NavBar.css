@@ -1,0 +1,41 @@
+header,
+footer {
+  width: 100%;
+  min-height: 15vh;
+  letter-spacing: 2px;
+  line-height: 90px;
+  background-color: #211f1f;
+  overflow: hidden;
+}
+
+.wrapper > .logo,
+.copyright {
+  width: 30%;
+  float: left;
+  color: white;
+  text-align: center;
+}
+
+.logoText {
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.wrapper > nav {
+  float: right;
+}
+
+nav > a {
+  margin: 0px 5px;
+  text-decoration: none;
+  color: white;
+  padding: 15px;
+}
+
+nav > a:hover {
+  background-color: #565956;
+  border-radius: 10px;
+  color: white;
+}
