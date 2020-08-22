@@ -104,7 +104,7 @@ const Tally = (props) => {
           "November",
           "December",
         ];
-        // console.log(cases);
+        // console.log("Cases", cases);
         const tempDate = new Date(cases[0].Date);
         let apiDateString = `${
           months[tempDate.getMonth()]

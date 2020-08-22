@@ -9,7 +9,7 @@ const NavBar = (props) => {
   const links = [
     { name: "Home", url: "/" },
     { name: "About us", url: "/about-us" },
-    { name: "Contact", url: "/contact" },
+    // { name: "Contact", url: "/contact" },
   ];
   return (
     <header>

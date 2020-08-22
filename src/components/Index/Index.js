@@ -17,6 +17,9 @@ import CountriesAPI from "../../axios/Countries";
 // Contexts
 import CasesContext from "../../context/CasesContext";
 
+// Assets
+import "./Index.css";
+
 const Index = () => {
   const [summary, setSummary] = useState([]);
   const [tempSummary, setTempSummary] = useState([]);
