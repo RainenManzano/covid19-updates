@@ -99,7 +99,7 @@ const World = (props) => {
             formatValue={formatValue}
           />
         </h1>
-        <div className="half-width">
+        <div className="half-width half-cases">
           <h2 className="text-white weight-500 br bl text-center">Recovered</h2>
           <h2 className="text-white weight-900 br bl text-center pb bb text-green number">
             <AnimatedNumber
@@ -113,7 +113,7 @@ const World = (props) => {
             />
           </h2>
         </div>
-        <div className="half-width">
+        <div className="half-width half-cases">
           <h2 className="text-white weight-500 br text-center">Deaths</h2>
           <h2 className="text-white weight-900 br text-center pb bb text-red number">
             <AnimatedNumber
@@ -127,7 +127,9 @@ const World = (props) => {
             />
           </h2>
         </div>
-        <h2 className="text-white weight-500 text-center">List of Countries</h2>
+        <h2 className="text-white weight-500 text-center lh-50">
+          List of Countries
+        </h2>
         <Table id="countriesTable" headings={headings} rows={rows} />
       </div>
       <div className="half-width">

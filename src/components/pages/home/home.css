@@ -8,6 +8,10 @@
     font-size: 48px !important;
   }
   /* World */
+  table#countriesTable thead,
+  table#countriesTable tbody tr {
+    font-size: 18px;
+  }
   .number {
     font-size: 38px !important;
   }
@@ -30,6 +34,10 @@
     font-size: 44px !important;
   }
   /* World */
+  table#countriesTable thead,
+  table#countriesTable tbody tr {
+    font-size: 16px;
+  }
   .number {
     font-size: 32px !important;
   }
@@ -52,6 +60,10 @@
     font-size: 40px !important;
   }
   /* World */
+  table#countriesTable thead,
+  table#countriesTable tbody tr {
+    font-size: 14px;
+  }
   .number {
     font-size: 28px !important;
   }
@@ -74,6 +86,13 @@
     font-size: 36px !important;
   }
   /* World */
+  table#countriesTable thead,
+  table#countriesTable tbody tr {
+    font-size: 12px;
+  }
+  .text-white {
+    font-size: 20px;
+  }
   .number {
     font-size: 24px !important;
   }
@@ -99,11 +118,23 @@
     font-size: 24px !important;
   }
   .text-white {
-    font-size: 24px !important;
+    font-size: 18px !important;
   }
   /* World */
+  table#countriesTable thead,
+  table#countriesTable tbody tr {
+    font-size: 18px;
+  }
   .number {
-    font-size: 24px !important;
+    font-size: 22px !important;
+  }
+  .half-width {
+    width: 100%;
+    display: block;
+  }
+  .half-cases {
+    display: inline-block;
+    width: 50%;
   }
 }
 
@@ -127,6 +158,10 @@
     font-size: 18px !important;
   }
   /* World */
+  table#countriesTable thead,
+  table#countriesTable tbody tr {
+    font-size: 12px;
+  }
   #active-cases {
     font-size: 18px;
   }
