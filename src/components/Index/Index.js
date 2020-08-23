@@ -4,11 +4,7 @@ import { AnimatedSwitch } from "react-router-transition";
 
 // Components
 import NavBar from "../NavBar/NavBar";
-import Tally from "../Banner/Tally/Tally";
-import World from "../Banner/World/World";
-import About from "../Banner/About/About";
-import Covid from "../Banner/Covid/Covid";
-import Technologies from "../Banner/Technologies/Technologies";
+import AsyncComponent from "../../hoc/asyncComponent";
 
 // Axios
 import CovidApi from "../../axios/covid19";
@@ -24,7 +20,13 @@ const Index = () => {
   const [summary, setSummary] = useState([]);
   const [tempSummary, setTempSummary] = useState([]);
   const value = { summary };
-
+  // async pages
+  const asyncHome = AsyncComponent(() => {
+    return import("../pages/home/home");
+  });
+  const asyncAbout = AsyncComponent(() => {
+    return import("../pages/about/about");
+  });
   // COVID API
   useEffect(() => {
     let isMounted = true;
@@ -91,31 +93,8 @@ const Index = () => {
           atActive={{ opacity: 1 }}
           className="switch-wrapper"
         >
-          <Route
-            path="/"
-            render={() => {
-              return (
-                <>
-                  <Tally />
-                  <World />
-                </>
-              );
-            }}
-            exact
-          />
-          <Route
-            path="/about-us"
-            render={() => {
-              return (
-                <>
-                  <About />
-                  <Covid />
-                  <Technologies />
-                </>
-              );
-            }}
-            exact
-          />
+          <Route path="/" component={asyncHome} exact />
+          <Route path="/about-us" component={asyncAbout} exact />
           <Route
             path="/contact"
             render={() => {

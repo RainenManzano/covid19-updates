@@ -87,9 +87,7 @@ const World = (props) => {
   return (
     <div id="global-banner" style={bannerStyle}>
       <div className="half-width">
-        <h2 className="text-white lh-50 pl weight-500 bt bl br">
-          Global Cases
-        </h2>
+        <h2 className="text-white pl weight-500 bt bl br">Global Cases</h2>
         <h1 className="text-white weight-900 text-center bb br bl pb text-yellow number">
           <AnimatedNumber
             value={cases}
@@ -102,9 +100,7 @@ const World = (props) => {
           />
         </h1>
         <div className="half-width">
-          <h2 className="text-white lh-50 weight-500 br bl text-center">
-            Recovered
-          </h2>
+          <h2 className="text-white weight-500 br bl text-center">Recovered</h2>
           <h2 className="text-white weight-900 br bl text-center pb bb text-green number">
             <AnimatedNumber
               value={recoveries}
@@ -118,7 +114,7 @@ const World = (props) => {
           </h2>
         </div>
         <div className="half-width">
-          <h2 className="text-white lh-50 weight-500 br text-center">Deaths</h2>
+          <h2 className="text-white weight-500 br text-center">Deaths</h2>
           <h2 className="text-white weight-900 br text-center pb bb text-red number">
             <AnimatedNumber
               value={deaths}
@@ -131,9 +127,7 @@ const World = (props) => {
             />
           </h2>
         </div>
-        <h2 className="text-white weight-500 text-center lh-50">
-          List of Countries
-        </h2>
+        <h2 className="text-white weight-500 text-center">List of Countries</h2>
         <Table id="countriesTable" headings={headings} rows={rows} />
       </div>
       <div className="half-width">
