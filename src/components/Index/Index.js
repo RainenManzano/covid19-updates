@@ -31,9 +31,6 @@ const Index = () => {
     CovidApi({
       method: "get",
       url: "countries",
-      params: {
-        yesterday: "true",
-      },
     })
       .then((response) => {
         // console.log("Covid API", response.data);
