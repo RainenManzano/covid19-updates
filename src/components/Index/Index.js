@@ -8,7 +8,6 @@ import AsyncComponent from "../../hoc/asyncComponent";
 
 // Axios
 import CovidApi from "../../axios/covid19";
-import CountriesAPI from "../../axios/Countries";
 
 // Contexts
 import CasesContext from "../../context/CasesContext";
@@ -32,6 +31,9 @@ const Index = () => {
     CovidApi({
       method: "get",
       url: "countries",
+      params: {
+        yesterday: "true",
+      },
     })
       .then((response) => {
         // console.log("Covid API", response.data);

@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
+import ReactTooltip from "react-tooltip";
 import AnimatedNumber from "react-animated-number";
 // Components
 import Table from "../../../UI/Table";
+import WorldMap from "../../worldMap/worldMap";
 // Contexts
 import CasesContext from "../../../context/CasesContext";
 // Assets
@@ -14,6 +16,7 @@ const World = (props) => {
   const [deaths, setDeaths] = useState(0);
   const [recoveries, setRecoveries] = useState(0);
   const [rows, setRows] = useState([]);
+  const [content, setContent] = useState("");
   const bannerStyle = {
     background: `url(${bg})`,
     backgroundSize: "cover",
@@ -33,7 +36,7 @@ const World = (props) => {
   useEffect(() => {
     let isMounted = true;
     // console.log(casesContext.summary);
-    if (casesContext.summary.length != 0) {
+    if (casesContext.summary.length !== 0) {
       // console.log("World Context", casesContext.summary.Global);
       let globalCases = 0;
       let globalRecovered = 0;
@@ -143,6 +146,8 @@ const World = (props) => {
       </div>
       <div className="half-width">
         <h2 className="text-white pl weight-500 lh-50">WORLD MAP</h2>
+        <WorldMap setTooltipContent={setContent} />
+        <ReactTooltip>{content}</ReactTooltip>
       </div>
     </div>
   );

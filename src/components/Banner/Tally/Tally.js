@@ -106,7 +106,7 @@ const Tally = (props) => {
           "November",
           "December",
         ];
-        console.log("Cases", cases);
+        // console.log("Cases", cases);
         const tempDate = new Date();
         let DateString = `${
           months[tempDate.getMonth()]
