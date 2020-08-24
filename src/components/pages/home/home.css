@@ -157,6 +157,19 @@
   .text-white {
     font-size: 18px !important;
   }
+  .logoText {
+    font-size: 11px;
+  }
+  nav > a {
+    margin: unset;
+    margin-right: 5px;
+    padding: 15px 5px;
+    font-size: 11px;
+  }
+  .wrapper > .logo,
+  .copyright {
+    font-size: 11px;
+  }
   /* World */
   table#countriesTable thead,
   table#countriesTable tbody tr {

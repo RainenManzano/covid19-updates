@@ -3,14 +3,14 @@ footer {
   width: 100%;
   min-height: 15vh;
   letter-spacing: 2px;
-  line-height: 90px;
+  line-height: 100px;
   background-color: #211f1f;
   overflow: hidden;
 }
 
 .wrapper > .logo,
 .copyright {
-  width: 30%;
+  width: 50%;
   float: left;
   color: white;
   text-align: center;

@@ -104,4 +104,17 @@
   #banner-3 > h1 {
     font-size: 36px;
   }
+  .logoText {
+    font-size: 11px;
+  }
+  nav > a {
+    margin: unset;
+    margin-right: 5px;
+    padding: 15px 5px;
+    font-size: 11px;
+  }
+  .wrapper > .logo,
+  .copyright {
+    font-size: 11px;
+  }
 }

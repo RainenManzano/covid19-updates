@@ -3,12 +3,7 @@ import React, { memo, useState, useEffect, useContext } from "react";
 import CasesContext from "../../context/CasesContext";
 // Maps
 import { scaleLinear } from "d3-scale";
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  ZoomableGroup,
-} from "react-simple-maps";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -54,47 +49,45 @@ const MapChart = ({ setTooltipContent }) => {
         }}
       >
         {cases.summary.length > 0 && (
-          <ZoomableGroup>
-            <Geographies geography={geoUrl}>
-              {({ geographies }) =>
-                geographies.map((geo) => {
-                  const d = cases.summary.find((s) => {
-                    return s
-                      ? s.countryInfo.iso3 === geo.properties.ISO_A3 ||
-                          s.countryInfo.iso2 === geo.properties.ISO_A2 ||
-                          s.country === geo.properties.Name
-                      : null;
-                  });
-                  return (
-                    <Geography
-                      key={geo.rsmKey}
-                      fill={d ? colorScale(d["cases"]) : "#F5F4F6"}
-                      geography={geo}
-                      onMouseEnter={() => {
-                        const { NAME } = geo.properties;
-                        let cases = "";
-                        if (d)
-                          cases = d["cases"].toLocaleString(undefined, {
-                            maximumFractionDigits: 0,
-                            minimumFractionDigits: 0,
-                          });
-                        setTooltipContent(`${NAME} — ${cases}`);
-                      }}
-                      onMouseLeave={() => {
-                        setTooltipContent("");
-                      }}
-                      style={{
-                        hover: {
-                          fill: "#635050",
-                          outline: "none",
-                        },
-                      }}
-                    />
-                  );
-                })
-              }
-            </Geographies>
-          </ZoomableGroup>
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map((geo) => {
+                const d = cases.summary.find((s) => {
+                  return s
+                    ? s.countryInfo.iso3 === geo.properties.ISO_A3 ||
+                        s.countryInfo.iso2 === geo.properties.ISO_A2 ||
+                        s.country === geo.properties.Name
+                    : null;
+                });
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    fill={d ? colorScale(d["cases"]) : "#F5F4F6"}
+                    geography={geo}
+                    onMouseEnter={() => {
+                      const { NAME } = geo.properties;
+                      let cases = "";
+                      if (d)
+                        cases = d["cases"].toLocaleString(undefined, {
+                          maximumFractionDigits: 0,
+                          minimumFractionDigits: 0,
+                        });
+                      setTooltipContent(`${NAME} — ${cases}`);
+                    }}
+                    onMouseLeave={() => {
+                      setTooltipContent("");
+                    }}
+                    style={{
+                      hover: {
+                        fill: "#635050",
+                        outline: "none",
+                      },
+                    }}
+                  />
+                );
+              })
+            }
+          </Geographies>
         )}
       </ComposableMap>
     </>
