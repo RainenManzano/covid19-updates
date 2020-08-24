@@ -15,8 +15,9 @@ import IpLocator from "../../../axios/IpLocator";
 import CasesContext from "../../../context/CasesContext";
 
 const getCountryCases = (country, data) => {
+  // console.log(data);
   const countryCases = data.filter((obj) => {
-    return obj.Country === country ? obj : false;
+    return obj.country === country ? obj : false;
   });
   return countryCases;
 };
@@ -88,8 +89,9 @@ const Tally = (props) => {
     let isMounted = true;
     // console.log(ipAddress, country);
     if (ipAddress !== null && country !== null) {
-      if (casesContext.summary.Countries) {
-        const cases = getCountryCases(country, casesContext.summary.Countries);
+      if (casesContext.summary) {
+        // console.log("Raw Cases", casesContext.summary);
+        const cases = getCountryCases(country, casesContext.summary);
         const months = [
           "January",
           "February",
@@ -104,23 +106,20 @@ const Tally = (props) => {
           "November",
           "December",
         ];
-        // console.log("Cases", cases);
-        const tempDate = new Date(cases[0].Date);
-        let apiDateString = `${
+        console.log("Cases", cases);
+        const tempDate = new Date();
+        let DateString = `${
           months[tempDate.getMonth()]
         } ${tempDate.getDate()}, ${tempDate.getFullYear()}`;
         if (isMounted) {
-          setApiDate(apiDateString);
-          setnewConfirmed(cases[0].NewConfirmed);
-          setTotalConfirmed(cases[0].TotalConfirmed);
-          setNewDeaths(cases[0].NewDeaths);
-          setTotalDeaths(cases[0].TotalDeaths);
-          setNewRecovered(cases[0].NewRecovered);
-          setTotalRecovered(cases[0].TotalRecovered);
-          setActiveCases(
-            cases[0].TotalConfirmed -
-              (cases[0].TotalDeaths + cases[0].TotalRecovered)
-          );
+          setApiDate(DateString);
+          setnewConfirmed(cases[0].todayCases);
+          setTotalConfirmed(cases[0].cases);
+          setNewDeaths(cases[0].todayDeaths);
+          setTotalDeaths(cases[0].deaths);
+          setNewRecovered(cases[0].todayRecovered);
+          setTotalRecovered(cases[0].recovered);
+          setActiveCases(cases[0].active);
         }
       }
     }

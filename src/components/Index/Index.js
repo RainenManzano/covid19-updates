@@ -18,7 +18,6 @@ import "./Index.css";
 
 const Index = () => {
   const [summary, setSummary] = useState([]);
-  const [tempSummary, setTempSummary] = useState([]);
   const value = { summary };
   // async pages
   const asyncHome = AsyncComponent(() => {
@@ -32,12 +31,12 @@ const Index = () => {
     let isMounted = true;
     CovidApi({
       method: "get",
-      url: "summary",
+      url: "countries",
     })
       .then((response) => {
         // console.log("Covid API", response.data);
         if (isMounted) {
-          setTempSummary(response.data);
+          setSummary(response.data);
         }
       })
       .catch((err) => console.log(err));
@@ -45,43 +44,6 @@ const Index = () => {
       isMounted = false;
     };
   }, []);
-
-  // COUNTRIES FLAG
-  useEffect(() => {
-    let isMounted = true;
-    CountriesAPI({
-      method: "get",
-      url: "/",
-      params: {
-        fields: "name;flag",
-      },
-    })
-      .then((response) => {
-        // console.log("Countries API", response.data);
-        const tempArray = [];
-        if (tempSummary.Countries) {
-          for (let countryData of tempSummary.Countries) {
-            const flag = response.data.find(
-              (country) => country.name === countryData.Country
-            );
-            const newCountry = { ...countryData, ...flag };
-            tempArray.push(newCountry);
-          }
-          const object = {
-            Countries: tempArray,
-            Date: tempSummary.Date,
-            Global: tempSummary.Global,
-          };
-          if (isMounted) {
-            setSummary(object);
-          }
-        }
-      })
-      .catch((err) => console.log(err));
-    return () => {
-      isMounted = false;
-    };
-  }, [tempSummary]);
 
   return (
     <>

@@ -32,41 +32,48 @@ const World = (props) => {
   // Global Cases (Total, Deaths, Recoveries)
   useEffect(() => {
     let isMounted = true;
-    if (
-      isMounted &&
-      casesContext.summary.Global &&
-      casesContext.summary.Countries
-    ) {
+    // console.log(casesContext.summary);
+    if (casesContext.summary.length != 0) {
       // console.log("World Context", casesContext.summary.Global);
+      let globalCases = 0;
+      let globalRecovered = 0;
+      let globalDeaths = 0;
       const tableRows = [];
-      for (let country of casesContext.summary.Countries) {
+      for (let country of casesContext.summary) {
+        globalCases += country.cases;
+        globalRecovered += country.recovered;
+        globalDeaths += country.deaths;
         tableRows.push([
           {
-            data: <span>{country.Country}</span>,
+            data: <span>{country.country}</span>,
             tdClass: "",
           },
           {
             data: (
-              <img src={country.flag} style={{ width: "40%" }} alt="flag" />
+              <img
+                src={country.countryInfo.flag}
+                style={{ width: "40%" }}
+                alt="flag"
+              />
             ),
             tdClass: "",
           },
           {
-            data: country.TotalConfirmed.toLocaleString(undefined, {
+            data: country.cases.toLocaleString(undefined, {
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
             }),
             tdClass: "",
           },
           {
-            data: country.TotalRecovered.toLocaleString(undefined, {
+            data: country.recovered.toLocaleString(undefined, {
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
             }),
             tdClass: "",
           },
           {
-            data: country.TotalDeaths.toLocaleString(undefined, {
+            data: country.deaths.toLocaleString(undefined, {
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
             }),
@@ -74,10 +81,12 @@ const World = (props) => {
           },
         ]);
       }
-      setRows(tableRows);
-      setCases(casesContext.summary.Global.TotalConfirmed);
-      setDeaths(casesContext.summary.Global.TotalDeaths);
-      setRecoveries(casesContext.summary.Global.TotalRecovered);
+      if (isMounted) {
+        setRows(tableRows);
+        setCases(globalCases);
+        setDeaths(globalDeaths);
+        setRecoveries(globalRecovered);
+      }
     }
     return () => {
       isMounted = false;
