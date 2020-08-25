@@ -58,7 +58,7 @@ const Tally = (props) => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [country]);
 
   // Getting IP's Location
   useEffect(() => {
@@ -90,7 +90,7 @@ const Tally = (props) => {
     return () => {
       isMounted = false;
     };
-  }, [ipAddress, country]);
+  }, [ipAddress]);
 
   // Setting confirmed, deaths, and recovered data
   useEffect(() => {
