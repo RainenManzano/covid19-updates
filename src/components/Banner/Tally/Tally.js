@@ -25,7 +25,7 @@ const getCountryCases = (country, data) => {
 const Tally = (props) => {
   const casesContext = useContext(CasesContext);
   const [ipAddress, setIpAddress] = useState(null);
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState(localStorage.getItem("country"));
   const [apiDate, setApiDate] = useState(null);
 
   const [newConfirmed, setnewConfirmed] = useState(0);
@@ -39,19 +39,22 @@ const Tally = (props) => {
   // Getting IP Address
   useEffect(() => {
     let isMounted = true;
-    IpIdentifier({ method: "get" })
-      .then((response) => {
-        const ipRawData = response.data;
-        let ipData = ipRawData.split("\n");
-        ipData = ipData.filter((data) => {
-          return data.indexOf("ip") !== -1 ? data : false;
-        });
-        ipData = ipData[0].split("=")[1];
-        if (isMounted) {
-          setIpAddress(ipData);
-        }
-      })
-      .catch((err) => console.log(err));
+    if (!country) {
+      // console.log("Getting IP Address");
+      IpIdentifier({ method: "get" })
+        .then((response) => {
+          const ipRawData = response.data;
+          let ipData = ipRawData.split("\n");
+          ipData = ipData.filter((data) => {
+            return data.indexOf("ip") !== -1 ? data : false;
+          });
+          ipData = ipData[0].split("=")[1];
+          if (isMounted) {
+            setIpAddress(ipData);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
     return () => {
       isMounted = false;
     };
@@ -60,7 +63,8 @@ const Tally = (props) => {
   // Getting IP's Location
   useEffect(() => {
     let isMounted = true;
-    if (ipAddress !== null) {
+    if (ipAddress !== null && !country) {
+      // console.log("Getting IP Location");
       IpLocator({
         method: "get",
         params: {
@@ -75,7 +79,11 @@ const Tally = (props) => {
             return info.indexOf("Country") !== -1 ? info : false;
           });
           if (!ipInfo[0]) setCountry("Philippines");
-          else setCountry(ipInfo[0].split(":")[1].trim());
+          else {
+            let countryName = ipInfo[0].split(":")[1].trim();
+            setCountry(countryName);
+            localStorage.setItem("country", countryName);
+          }
         }
       });
     }
@@ -87,46 +95,44 @@ const Tally = (props) => {
   // Setting confirmed, deaths, and recovered data
   useEffect(() => {
     let isMounted = true;
-    // console.log(ipAddress, country);
-    if (ipAddress !== null && country !== null) {
-      if (casesContext.summary) {
-        // console.log("Raw Cases", casesContext.summary);
-        const cases = getCountryCases(country, casesContext.summary);
-        const months = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ];
-        // console.log("Cases", cases);
-        const tempDate = new Date();
-        let DateString = `${
-          months[tempDate.getMonth()]
-        } ${tempDate.getDate()}, ${tempDate.getFullYear()}`;
-        if (isMounted) {
-          setApiDate(DateString);
-          setnewConfirmed(cases[0].todayCases);
-          setTotalConfirmed(cases[0].cases);
-          setNewDeaths(cases[0].todayDeaths);
-          setTotalDeaths(cases[0].deaths);
-          setNewRecovered(cases[0].todayRecovered);
-          setTotalRecovered(cases[0].recovered);
-          setActiveCases(cases[0].active);
-        }
+    if (country && casesContext.summary.length > 0) {
+      // console.log("Setting");
+      // console.log("Raw Cases", casesContext.summary);
+      const cases = getCountryCases(country, casesContext.summary);
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      // console.log("Cases", cases);
+      const tempDate = new Date();
+      let DateString = `${
+        months[tempDate.getMonth()]
+      } ${tempDate.getDate()}, ${tempDate.getFullYear()}`;
+      if (isMounted) {
+        setApiDate(DateString);
+        setnewConfirmed(cases[0].todayCases);
+        setTotalConfirmed(cases[0].cases);
+        setNewDeaths(cases[0].todayDeaths);
+        setTotalDeaths(cases[0].deaths);
+        setNewRecovered(cases[0].todayRecovered);
+        setTotalRecovered(cases[0].recovered);
+        setActiveCases(cases[0].active);
       }
     }
     return () => {
       isMounted = false;
     };
-  }, [ipAddress, country, casesContext.summary]);
+  }, [country, casesContext.summary]);
 
   const formatValue = (value) =>
     value.toLocaleString(undefined, {
