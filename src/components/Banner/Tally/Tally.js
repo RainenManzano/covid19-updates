@@ -120,13 +120,13 @@ const Tally = (props) => {
       } ${tempDate.getDate()}, ${tempDate.getFullYear()}`;
       if (isMounted) {
         setApiDate(DateString);
-        setnewConfirmed(cases[0].todayCases);
-        setTotalConfirmed(cases[0].cases);
-        setNewDeaths(cases[0].todayDeaths);
-        setTotalDeaths(cases[0].deaths);
-        setNewRecovered(cases[0].todayRecovered);
-        setTotalRecovered(cases[0].recovered);
-        setActiveCases(cases[0].active);
+        setnewConfirmed(cases[0].todayCases ? cases[0].todayCases : 0);
+        setTotalConfirmed(cases[0].cases ? cases[0].cases : 0);
+        setNewDeaths(cases[0].todayDeaths ? cases[0].todayDeaths : 0);
+        setTotalDeaths(cases[0].deaths ? cases[0].deaths : 0);
+        setNewRecovered(cases[0].todayRecovered ? cases[0].todayRecovered : 0);
+        setTotalRecovered(cases[0].recovered ? cases[0].recovered : 0);
+        setActiveCases(cases[0].active ? cases[0].active : 0);
       }
     }
     return () => {
@@ -139,7 +139,7 @@ const Tally = (props) => {
       maximumFractionDigits: 0,
       minimumFractionDigits: 0,
     });
-  const duration = 3000;
+  const duration = 2000;
   let tableHeadings = ["CASES", "NEW", "TOTAL"];
   let tableRows = [
     [

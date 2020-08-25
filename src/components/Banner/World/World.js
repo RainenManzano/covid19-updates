@@ -24,7 +24,7 @@ const World = (props) => {
     backgroundPosition: "center",
     backgroundAttachment: "fixed",
   };
-  const duration = 3000;
+  const duration = 2000;
   const formatValue = (value) =>
     value.toLocaleString(undefined, {
       maximumFractionDigits: 0,
