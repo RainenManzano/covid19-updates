@@ -90,7 +90,7 @@ const Tally = (props) => {
     return () => {
       isMounted = false;
     };
-  }, [ipAddress]);
+  }, [ipAddress, country]);
 
   // Setting confirmed, deaths, and recovered data
   useEffect(() => {
